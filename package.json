@@ -1,15 +1,24 @@
 {
   "name": "bamazon",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "App to create a store database",
+  "main": "bamazonCustomer.js",
   "dependencies": {
-    "inquirer": "^5.2.0"
+    "inquirer": "^5.2.0",
+    "mysql": "^2.15.0"
   },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kevinglasow/bamazon.git"
+  },
+  "author": "Kevin Glasow",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kevinglasow/bamazon/issues"
+  },
+  "homepage": "https://github.com/kevinglasow/bamazon#readme"
 }
