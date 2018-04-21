@@ -1,3 +1,3 @@
 exports.secure = {
-    password: "letmein1"
+    password: "PUT_YOUR_PASSWORD_HERE"
 }
