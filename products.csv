@@ -1,0 +1,9 @@
+item_id,product_name,department_name,price,stock_quantity
+1,Watchmen,Books,35,130
+2,Annihilation,Books,15,30
+3,"Star Wars: The Last Jedi",Movies,30,53
+4,"Breath of the Wild",Games,50,50
+5,Jacket,Clothing,40,3
+6,"Near and Far",Games,70,5
+7,PS4,Games,300,25
+8,Laptop,Electronics,300,130

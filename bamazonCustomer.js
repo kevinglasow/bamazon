@@ -1,6 +1,7 @@
 var mysql = require("mysql");
 var password = require("./pw");
 var inquirer = require("inquirer");
+var chosenItem = ""
 
 var connection = mysql.createConnection({
     host: "localhost",
@@ -15,6 +16,13 @@ function userInterface() {
             name: "whichProduct",
             type: "input",
             message: "Please enter the ID for the item you'd like to purchase",
+            validate: function (value) {
+                if (isNaN(value) === false) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
         },
         {
             name: "quantity",
@@ -33,29 +41,35 @@ function userInterface() {
         connection.query("select * from products where item_id=" + answer.whichProduct, function (err, results) {
             if (err) throw err;
             // create a variable to store the results in an object
-            var chosenItem;
+            // var chosenItem;
             for (var i = 0; i < results.length; i++) {
                 chosenItem = results[i];
             }
             if (chosenItem.stock_quantity >= answer.quantity) {
-                removeFromInventory(answer);
                 console.log("Success! You have bought " + answer.quantity + " of " + chosenItem.product_name + ".");
                 console.log("You total comes to: $" + answer.quantity * chosenItem.price + ".00.")
+                removeFromInventory(answer);
             } else {
                 console.log("Insufficent quantity.")
+                connection.end();
             }
-            connection.end();
+
         })
     })
 }
 
 function removeFromInventory(answer) {
-    connection.query("update products set stock_quantity=100 WHERE item_id=1", function (err, results) {
-        if (err) throw err;
-        console.log("Database updated")
-        connection.end();
-    });
-
+    var connectionQuery = connection.query(
+        "UPDATE products SET stock_quantity = ? WHERE item_id = ?", [
+            (chosenItem.stock_quantity - answer.quantity),
+            chosenItem.item_id
+        ],
+        function (err) {
+            if (err) throw err;
+            console.log("Database updated")
+            connection.end()
+        });
+    console.log(connectionQuery.sql)
 }
 
 userInterface()
